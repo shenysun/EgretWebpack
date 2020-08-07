@@ -25,49 +25,41 @@
 //  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
+import { AssetAdapter } from "./AssetAdapter";
+import { ThemeAdapter } from "./ThemeAdapter";
+import { platform } from "./Platform";
+import { LoadingUI } from "./LoadingUI";
 //////////////////////////////////////////////////////////////////////////////////////
-
-class Main extends eui.UILayer {
-
-
+export class Main extends eui.UILayer {
     protected createChildren(): void {
         super.createChildren();
-
         egret.lifecycle.addLifecycleListener((context) => {
             // custom lifecycle plugin
-        })
-
+        });
         egret.lifecycle.onPause = () => {
             egret.ticker.pause();
-        }
-
+        };
         egret.lifecycle.onResume = () => {
             egret.ticker.resume();
-        }
-
+        };
         //inject the custom material parser
         //注入自定义的素材解析器
         let assetAdapter = new AssetAdapter();
         egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
         egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
-
-
         this.runGame().catch(e => {
             console.log(e);
-        })
+        });
     }
-
     private async runGame() {
-        await this.loadResource()
+        await this.loadResource();
         this.createGameScene();
-        const result = await RES.getResAsync("description_json")
+        const result = await RES.getResAsync("description_json");
         this.startAnimation(result);
         await platform.login();
         const userInfo = await platform.getUserInfo();
         console.log(userInfo);
-
     }
-
     private async loadResource() {
         try {
             const loadingView = new LoadingUI();
@@ -81,7 +73,6 @@ class Main extends eui.UILayer {
             console.error(e);
         }
     }
-
     private loadTheme() {
         return new Promise((resolve, reject) => {
             // load skin theme configuration file, you can manually modify the file. And replace the default skin.
@@ -90,10 +81,8 @@ class Main extends eui.UILayer {
             theme.addEventListener(eui.UIEvent.COMPLETE, () => {
                 resolve();
             }, this);
-
-        })
+        });
     }
-
     private textfield: egret.TextField;
     /**
      * 创建场景界面
@@ -106,19 +95,16 @@ class Main extends eui.UILayer {
         let stageH = this.stage.stageHeight;
         sky.width = stageW;
         sky.height = stageH;
-
         let topMask = new egret.Shape();
         topMask.graphics.beginFill(0x000000, 0.5);
         topMask.graphics.drawRect(0, 0, stageW, 172);
         topMask.graphics.endFill();
         topMask.y = 33;
         this.addChild(topMask);
-
         let icon: egret.Bitmap = this.createBitmapByName("egret_icon_png");
         this.addChild(icon);
         icon.x = 26;
         icon.y = 33;
-
         let line = new egret.Shape();
         line.graphics.lineStyle(2, 0xffffff);
         line.graphics.moveTo(0, 0);
@@ -127,8 +113,6 @@ class Main extends eui.UILayer {
         line.x = 172;
         line.y = 61;
         this.addChild(line);
-
-
         let colorLabel = new egret.TextField();
         colorLabel.textColor = 0xffffff;
         colorLabel.width = stageW - 172;
@@ -138,7 +122,6 @@ class Main extends eui.UILayer {
         colorLabel.x = 172;
         colorLabel.y = 80;
         this.addChild(colorLabel);
-
         let textfield = new egret.TextField();
         this.addChild(textfield);
         textfield.alpha = 0;
@@ -149,7 +132,6 @@ class Main extends eui.UILayer {
         textfield.x = 172;
         textfield.y = 135;
         this.textfield = textfield;
-
         let button = new eui.Button();
         button.label = "Click!";
         button.horizontalCenter = 0;
@@ -173,7 +155,6 @@ class Main extends eui.UILayer {
      */
     private startAnimation(result: Array<any>): void {
         let parser = new egret.HtmlTextParser();
-
         let textflowArr = result.map(text => parser.parse(text));
         let textfield = this.textfield;
         let count = -1;
@@ -183,7 +164,6 @@ class Main extends eui.UILayer {
                 count = 0;
             }
             let textFlow = textflowArr[count];
-
             // 切换描述内容
             // Switch to described content
             textfield.textFlow = textFlow;
@@ -193,10 +173,8 @@ class Main extends eui.UILayer {
             tw.to({ "alpha": 0 }, 200);
             tw.call(change, this);
         };
-
         change();
     }
-
     /**
      * 点击按钮
      * Click the button
@@ -209,3 +187,4 @@ class Main extends eui.UILayer {
         this.addChild(panel);
     }
 }
+window["Main"] = Main;
