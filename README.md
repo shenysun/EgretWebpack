@@ -47,7 +47,7 @@ new HtmlWebpackPlugin({
         <script src="<%=script %>"></script>
         <% }) %>
     删除XMLHttpRequest加载js文件, 
-    具体修改见index.html
+    具体修改见[index.html](./index.html)
 
 ## 4. 使用船新命令
 使用`npm run build`和`npm run start`代替`egret build`和`egret run`命令
