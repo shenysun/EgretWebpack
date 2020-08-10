@@ -3,7 +3,7 @@
 
 ## HOW TO RUN
 #### 安装环境：
-`npm install webpack webpack-cli webpack-dev-server clean-webpack-plugin html-webpack-plugin typescript ts-loader --save-dev`
+`npm install`
 
 #### 启动：
 `npm run start`
