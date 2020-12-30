@@ -69,5 +69,9 @@ new HtmlWebpackPlugin({
 
 不足: 如果项目中其他位置还有使用`getDefinitionByName`方法的,需要每个文件都加上这句话,加大工作量
 
-### [在VSCode中调试webpack-dev-server项目](https://zhuanlan.zhihu.com/p/106793313)
+### 增加一键编译调试
+
+在vs调试项选择 Launch Chrome 之后可使用F5一键编译调试
+
+[在VSCode中调试webpack-dev-server项目](https://zhuanlan.zhihu.com/p/106793313)
 
