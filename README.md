@@ -68,3 +68,6 @@ new HtmlWebpackPlugin({
 可以在Main.ts的底部加上`window['Main'] = Main;`解决此问题.
 
 不足: 如果项目中其他位置还有使用`getDefinitionByName`方法的,需要每个文件都加上这句话,加大工作量
+
+### [在VSCode中调试webpack-dev-server项目](https://zhuanlan.zhihu.com/p/106793313)
+
