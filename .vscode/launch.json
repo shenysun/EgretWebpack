@@ -8,15 +8,6 @@
             "url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}",
             "preLaunchTask": "debug"
-        },
-
-        {
-            "type": "Egret",
-            "request": "launch",
-            "name": "Egret WebpackDevServer Debugger",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}",
-            "preLaunchTask": "egret: build"
         }
     ],
     "version": "0.2.0"

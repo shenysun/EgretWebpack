@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "convert": "convert-egret convert ./ ./dist",
-        "start": "webpack-dev-server",
+        "start": "webpack-dev-server --open",
+        "debug": "webpack-dev-server",
         "build": "webpack"
     },
     "repository": {
